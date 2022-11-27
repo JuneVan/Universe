@@ -1,0 +1,25 @@
+﻿global using Microsoft.AspNetCore.Http;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.AspNetCore.Mvc.Abstractions;
+global using Microsoft.AspNetCore.Mvc.ApplicationModels;
+global using Microsoft.AspNetCore.Mvc.Controllers;
+global using Microsoft.AspNetCore.Mvc.Filters;
+global using Microsoft.AspNetCore.Mvc.Routing;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.DependencyInjection.Extensions;
+global using Microsoft.Extensions.Logging;
+global using System.Net;
+global using System.Reflection;
+global using System.Text;
+global using Universe.Authorization;
+global using Universe.Domain;
+global using Universe.Extensions.AspNetCore.Mvc.ExceptionHandling;
+global using Universe.Extensions.AspNetCore.Mvc.Extensions;
+global using Universe.Extensions.AspNetCore.Mvc.Helpers;
+global using Universe.Extensions.AspNetCore.Mvc.Models;
+global using Universe.Extensions.AspNetCore.Mvc.Validation;
+global using Universe.Extensions.AspNetCore.Threading;
+global using Universe.Logging;
+global using Universe.Reflections;
+global using Universe.Threading;
+

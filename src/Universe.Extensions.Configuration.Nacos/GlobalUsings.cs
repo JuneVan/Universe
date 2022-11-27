@@ -1,0 +1,10 @@
+﻿global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.DependencyInjection.Extensions;
+global using Microsoft.Extensions.Hosting;
+global using Nacos.Microsoft.Extensions.Configuration;
+global using Nacos.V2;
+global using Nacos.V2.Exceptions;
+global using System.Collections.Concurrent;
+global using Universe.Configuration;
+global using Universe.Extensions.Configuration.Nacos;

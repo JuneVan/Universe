@@ -1,0 +1,24 @@
+<Project>
+    <PropertyGroup>
+        <Version>0.0.1-alpha</Version>
+        <Authors>June</Authors> 
+        <Company>Universal gravitation (Shenzhen) Network Technology Co., Ltd</Company> 
+		<PackageIcon>universe.png</PackageIcon>
+    </PropertyGroup>
+
+
+	<ItemGroup>
+		<None Include="..\..\universe.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+	
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<NoWarn>1701;1702;1591;</NoWarn>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<NoWarn>1701;1702;1591;</NoWarn>
+	</PropertyGroup>
+</Project>

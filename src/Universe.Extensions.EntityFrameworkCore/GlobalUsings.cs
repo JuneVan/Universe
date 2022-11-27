@@ -1,0 +1,15 @@
+﻿global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.ChangeTracking;
+global using Microsoft.EntityFrameworkCore.Storage;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Logging;
+global using Microsoft.Extensions.Logging.Debug;
+global using System.Data;
+global using System.Linq.Expressions;
+global using System.Reflection;
+global using Universe.Domain;
+global using Universe.Domain.Auditing;
+global using Universe.Domain.Events;
+global using Universe.Identifiers;
+global using Universe.Reflections;
+global using Universe.Threading;
