@@ -26,7 +26,7 @@
         public async Task<TKey> InsertAndGetIdAsync(TEntity entity)
         {
             await InsertAsync(entity);
-            await UnitOfWork.CommitAsync();
+            await Context.SaveChangesAsync(CancellationToken);
             return entity.Id;
         }
         public async Task<TEntity> InsertOrUpdateAsync(TEntity entity)

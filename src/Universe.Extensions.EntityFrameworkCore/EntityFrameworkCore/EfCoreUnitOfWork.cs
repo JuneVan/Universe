@@ -1,7 +1,7 @@
 ﻿namespace Universe.Extensions.EntityFrameworkCore
 {
     public class EfCoreUnitOfWork<TDbContext> : IUnitOfWork
-          where TDbContext : EfCoreDbContext
+          where TDbContext : EfCoreDbContext<TDbContext>
     {
         private readonly IDbContextTransaction _dbContextTransaction;
         private readonly TDbContext _context;
@@ -13,7 +13,8 @@
             _signal = signal;
             _dbContextTransaction = _context.Database.BeginTransaction();
         }
-        public void RegisterNew<TEntity,TKey>(TEntity entity)
+        protected CancellationToken CancellationToken => _signal.Token;
+        public void RegisterNew<TEntity, TKey>(TEntity entity)
           where TEntity : class, IEntity<TKey>
         {
             _context.Set<TEntity>().Add(entity);
@@ -33,12 +34,12 @@
             int result;
             try
             {
-                result = await _context.SaveChangesAsync();
-                await _dbContextTransaction.CommitAsync();
+                result = await _context.SaveChangesAsync(CancellationToken);
+                await _dbContextTransaction.CommitAsync(CancellationToken);
             }
             catch
             {
-                _dbContextTransaction.Rollback();
+                await _dbContextTransaction.RollbackAsync(CancellationToken);
                 throw;
             }
             return result;

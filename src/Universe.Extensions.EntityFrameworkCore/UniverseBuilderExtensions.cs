@@ -7,7 +7,7 @@
         /// </summary> 
         /// <returns></returns>
         public static UniverseBuilder AddEntityFrameworkCore<TDbContext>(this UniverseBuilder builder, Action<DbContextOptionsBuilder> configure)
-            where TDbContext : EfCoreDbContext
+            where TDbContext : EfCoreDbContext<TDbContext>
         {
             // 查找所有的是实体类型
             var entityTypes = from property in typeof(TDbContext).GetProperties(BindingFlags.Public | BindingFlags.Instance)

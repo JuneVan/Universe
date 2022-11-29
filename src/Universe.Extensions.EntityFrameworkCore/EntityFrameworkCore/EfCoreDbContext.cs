@@ -1,6 +1,7 @@
 ﻿namespace Universe.Extensions.EntityFrameworkCore
 {
-    public abstract class EfCoreDbContext : DbContext
+    public abstract class EfCoreDbContext<TDbContext> : DbContext
+        where TDbContext : DbContext
     {
         private readonly LoggerFactory _loggerFactory = new(new[] {
             new DebugLoggerProvider()
@@ -8,14 +9,11 @@
         public EfCoreDbContext(DbContextOptions options, IServiceProvider serviceProvider) : base(options)
         {
             UserIdentifier = serviceProvider.GetService<IUserIdentifier>();
-            Signal = serviceProvider.GetService<ISignal>();
             EventBus = serviceProvider.GetService<IEventBus>();
             EntityChangeEventHelper = serviceProvider.GetService<IEntityChangeEventHelper>();
         }
         protected string? Schema { get; }
         protected IUserIdentifier? UserIdentifier { get; }
-        protected ISignal? Signal { get; }
-        protected CancellationToken CancellationToken => Signal?.Token ?? CancellationToken.None;
         protected IEntityChangeEventHelper? EntityChangeEventHelper { get; private set; }
         protected IEventBus? EventBus { get; private set; }
 
@@ -32,7 +30,7 @@
         {
             ApplySetAuditedEntity();
             NotifyEntityEvents();
-            int result = base.SaveChanges(acceptAllChangesOnSuccess); 
+            int result = base.SaveChanges(acceptAllChangesOnSuccess);
             NotifyDomainEvents();
             return result;
         }
@@ -48,6 +46,7 @@
             if (Schema != null)
                 modelBuilder.Model.SetDefaultSchema(Schema);
             base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(TDbContext).Assembly);
             ApplyFilterDeletedEntity(modelBuilder);
         }
 
