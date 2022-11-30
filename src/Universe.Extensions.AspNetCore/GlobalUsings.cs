@@ -17,9 +17,10 @@ global using Universe.Extensions.AspNetCore.Mvc.ExceptionHandling;
 global using Universe.Extensions.AspNetCore.Mvc.Extensions;
 global using Universe.Extensions.AspNetCore.Mvc.Helpers;
 global using Universe.Extensions.AspNetCore.Mvc.Models;
+global using Universe.Extensions.AspNetCore.Mvc.Result;
+global using Universe.Extensions.AspNetCore.Mvc.Route;
 global using Universe.Extensions.AspNetCore.Mvc.Validation;
 global using Universe.Extensions.AspNetCore.Threading;
 global using Universe.Logging;
 global using Universe.Reflections;
 global using Universe.Threading;
-
