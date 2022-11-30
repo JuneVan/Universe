@@ -35,7 +35,7 @@
             {
                 IConfigurationRoot configurationRoot = GetConfigurationBuilder(new ConfigurationBuilder(), path, environmentName).Build();
 
-                var nacosOptions = configurationRoot.GetValue<NacosSdkOptions>("Nacos");
+                var nacosOptions = configurationRoot.GetSection("Nacos").Get<NacosSdkOptions>();
                 if (nacosOptions == null)
                     throw new NacosException("未找到Nacos配置信息。");
 
@@ -44,11 +44,12 @@
                 configure.Namespace = nacosOptions.Namespace;
                 configure.UserName = nacosOptions.UserName;
                 configure.Password = nacosOptions.Password;
+                configure.ListenInterval = nacosOptions.ListenInterval;
                 configure.ConfigUseRpc = false;
                 configure.NamingUseRpc = false;
                 List<ConfigListener> list = new();
                 var listeners = configurationRoot.GetSection("Nacos:Listeners")?.Get<List<ConfigListener>>();
-                if (listeners != null && !listeners.Any())
+                if (listeners != null && listeners.Any())
                     configure.Listeners = listeners;
             });
             builder = GetConfigurationBuilder(builder, path, environmentName);
